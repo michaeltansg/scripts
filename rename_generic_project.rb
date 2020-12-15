@@ -20,7 +20,7 @@ def return_first_matching_file
 end
 
 Find.find('.') do |path|
-  if path =~ /(\.git\/|#{Regexp.escape(File.basename(__FILE__))}$)/
+  if path =~ /(\.git\/|Pods\/|#{Regexp.escape(File.basename(__FILE__))}$)/
   else
     file_paths << path unless File.directory?(path)
 	end
@@ -42,3 +42,7 @@ end
 while file = return_first_matching_file do
   FileUtils.mv file, file.gsub($generic_project_name, project_name)
 end
+
+puts
+puts 'If you are using pods, run pod install again before launching the workspace.'
+puts
